@@ -12,15 +12,12 @@ public class Snake : MonoBehaviour {
         Alive = 0,
         Dead
     }
-
-    //TODO: A list of GameObjects, when the player dies the object dont get destroyed they get put in the list
-    //Then, when the player eats an object ONLY gets instantiated if the list is empty
-    //TODO: Same for food
-
+    
     private Vector2 MovementDirection;
     private Vector2 OldHeadPosition;
 
     private List<GameObject> TailPieces;
+    private Stack<GameObject> UnusedTailPieces;
 
     private double TimeSinceMove;
 
@@ -35,6 +32,7 @@ public class Snake : MonoBehaviour {
         MovementDirection = Vector2.right;
 
         TailPieces = new List<GameObject>();
+        UnusedTailPieces = new Stack<GameObject>();
 
         ResetSnake();
 
@@ -82,7 +80,7 @@ public class Snake : MonoBehaviour {
         if(collision.CompareTag("Food"))
         {
             AddTailToSnake();
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         }
         else
         {
@@ -97,12 +95,7 @@ public class Snake : MonoBehaviour {
         transform.position = Vector3.zero;
         OldHeadPosition = Vector2.zero;
 
-        for(int i = 0; i < TailPieces.Count; i++)
-        {
-            Destroy(TailPieces[i]);
-        }
-
-        TailPieces.Clear();
+        RemoveTailFromSnake();
 
         CurrentState = SnakeState.Alive;
 
@@ -143,8 +136,28 @@ public class Snake : MonoBehaviour {
 
     private void AddTailToSnake()
     {
-        GameObject tail = Instantiate(SnakeTailPrefab, OldHeadPosition, Quaternion.identity);
-        TailPieces.Insert(0, tail);
+        GameObject tailPiece;
+
+        if (UnusedTailPieces.Count > 0) tailPiece = UnusedTailPieces.Pop();
+        else tailPiece = Instantiate(SnakeTailPrefab);
+
+        tailPiece.SetActive(true);
+
+        tailPiece.transform.position = OldHeadPosition;
+        tailPiece.transform.rotation = Quaternion.identity;
+
+        TailPieces.Insert(0, tailPiece);
+    }
+    private void RemoveTailFromSnake()
+    {
+        for (int i = 0; i < TailPieces.Count; i++)
+        {
+            GameObject tailPiece = TailPieces[i];
+            tailPiece.SetActive(false);
+            UnusedTailPieces.Push(tailPiece);
+        }
+
+        TailPieces.Clear();
     }
 
     public int GetSize()

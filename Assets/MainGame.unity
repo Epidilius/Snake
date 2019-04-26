@@ -451,75 +451,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!1 &291509620
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 291509622}
-  - component: {fileID: 291509621}
-  - component: {fileID: 291509623}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: GameController
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &291509621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 291509620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64490c6b25c222a4bae6196c26415795, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SnakeFoodPrefab: {fileID: 1229460437053762, guid: 62ea2e54c6a4b064eb2759299b633747,
-    type: 2}
-  BorderTop: {fileID: 207716929}
-  BorderBottom: {fileID: 490467111}
-  BorderLeft: {fileID: 2101065231}
-  BorderRight: {fileID: 160899818}
---- !u!4 &291509622
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 291509620}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &291509623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 291509620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e81ea407653f4ed478a15f9a95318282, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Snake: {fileID: 1337883241}
-  GameCanvas: {fileID: 1220929031}
-  GameOverCanvas: {fileID: 302586664}
-  FirstStartCanvas: {fileID: 946400100}
-  ScoreLengthText: {fileID: 1341675764}
-  ScoreTimeText: {fileID: 1346769155}
-  GameOverFailureText: {fileID: 633637792}
-  HighScoreLengthText: {fileID: 1801081069}
-  HighScoreTimeText: {fileID: 1413395759}
-  GameOverLengthText: {fileID: 74633698}
-  GameOverTimeText: {fileID: 1593321771}
 --- !u!1 &302586661
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,7 +544,7 @@ RectTransform:
   - {fileID: 1413395758}
   - {fileID: 1394738623}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -890,6 +821,8 @@ GameObject:
   - component: {fileID: 517931368}
   - component: {fileID: 517931367}
   - component: {fileID: 517931366}
+  - component: {fileID: 517931370}
+  - component: {fileID: 517931369}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -940,8 +873,47 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &517931369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 517931365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e81ea407653f4ed478a15f9a95318282, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Snake: {fileID: 1337883241}
+  GameCanvas: {fileID: 1220929031}
+  GameOverCanvas: {fileID: 302586664}
+  FirstStartCanvas: {fileID: 946400100}
+  ScoreLengthText: {fileID: 1341675764}
+  ScoreTimeText: {fileID: 1346769155}
+  GameOverFailureText: {fileID: 633637792}
+  HighScoreLengthText: {fileID: 1801081069}
+  HighScoreTimeText: {fileID: 1413395759}
+  GameOverLengthText: {fileID: 74633698}
+  GameOverTimeText: {fileID: 1593321771}
+--- !u!114 &517931370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 517931365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64490c6b25c222a4bae6196c26415795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SnakeFoodPrefab: {fileID: 1229460437053762, guid: 62ea2e54c6a4b064eb2759299b633747,
+    type: 2}
+  BorderTop: {fileID: 207716929}
+  BorderBottom: {fileID: 490467111}
+  BorderLeft: {fileID: 2101065231}
+  BorderRight: {fileID: 160899818}
 --- !u!1 &535052104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1119,7 +1091,7 @@ Transform:
   m_Children:
   - {fileID: 1913327146}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &946400097
 GameObject:
@@ -1211,7 +1183,7 @@ RectTransform:
   - {fileID: 1689530963}
   - {fileID: 36857851}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1412,7 +1384,7 @@ RectTransform:
   - {fileID: 1341675763}
   - {fileID: 1346769154}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

@@ -18,12 +18,14 @@ public class FoodSpawner : MonoBehaviour {
     private double TimeSinceSpawn;
 
     private List<GameObject> FoodPieces;
+    private Stack<GameObject> UnusedFoodPieces;
 
     private bool ShouldSpawnFood;
 
     // Use this for initialization
     void Start () {
         FoodPieces = new List<GameObject>();
+        UnusedFoodPieces = new Stack<GameObject>();
 
         ResetFoodSpawner();
 
@@ -35,23 +37,18 @@ public class FoodSpawner : MonoBehaviour {
         TimeSinceSpawn += Time.deltaTime;
         if (TimeSinceSpawn > (DEFAULT_SPAWN_TIME / SnakeLength))
         {
-            InstantiateFood();
+            SpawnFood();
             TimeSinceSpawn = 0d;
         }
     }
-
+    
     public void ResetFoodSpawner()
     {
         TimeSinceSpawn = 0d;
 
         SnakeLength = 0;
 
-        for (int i = 0; i < FoodPieces.Count; i++)
-        {
-            Destroy(FoodPieces[i]);
-        }
-
-        FoodPieces.Clear();
+        RemoveFood();
 
         StartSpawningFood();
     }
@@ -69,13 +66,33 @@ public class FoodSpawner : MonoBehaviour {
         SnakeLength = tailLength;
     }
 
-    private void InstantiateFood()
+    private void SpawnFood()
     {
         if (ShouldSpawnFood == false) return;
 
+        GameObject foodPiece;
         int x = (int)Random.Range(BorderLeft.position.x, BorderRight.position.x);
         int y = (int)Random.Range(BorderBottom.position.y, BorderTop.position.y);
-        
-        FoodPieces.Add(Instantiate(SnakeFoodPrefab, new Vector2(x, y), Quaternion.identity));
+
+        if (UnusedFoodPieces.Count > 0) foodPiece = UnusedFoodPieces.Pop();
+        else foodPiece = Instantiate(SnakeFoodPrefab);
+
+        foodPiece.SetActive(true);
+
+        foodPiece.transform.position = new Vector2(x, y);
+        foodPiece.transform.rotation = Quaternion.identity;
+
+        FoodPieces.Add(foodPiece);
+    }
+    private void RemoveFood()
+    {
+        for (int i = 0; i < FoodPieces.Count; i++)
+        {
+            GameObject foodPiece = FoodPieces[i];
+            foodPiece.SetActive(false);
+            UnusedFoodPieces.Push(foodPiece);
+        }
+
+        FoodPieces.Clear();
     }
 }
