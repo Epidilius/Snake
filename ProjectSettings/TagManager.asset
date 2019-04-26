@@ -8,6 +8,11 @@ TagManager:
   - Food
   - SnakeHead
   - SnakeTail
+  - ScoreLength
+  - ScoreTime
+  - Score
+  - GameOver
+  - FirstPlayUI
   layers:
   - Default
   - TransparentFX
